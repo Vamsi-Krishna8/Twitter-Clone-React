@@ -4,6 +4,7 @@ import express from "express";
 import authRoutes from "./routes/auth.routes.js";
 import dotenv from "dotenv";
 import connectMongoDB from "./db/connectMongoDB.js";
+import cookieParser from "cookie-parser";
 
 /*
     The line dotenv.config(); is used to load environment variables from a .env file into process.env. 
@@ -36,6 +37,9 @@ const app = express();
 
 */
 
+app.use(express.json()); //to parse request.body
+app.use(express.urlencoded({ extended: true })); //to parse form data(req.body)
+app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 
 //Started the server on port 8000 and logged a message to the console.
